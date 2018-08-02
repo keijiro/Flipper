@@ -33,4 +33,5 @@ void surf(Input IN, inout SurfaceOutputStandard o)
 {
     o.Albedo = IN.vface < 0 ? _BackColor : tex2D(_MainTex, IN.uv_MainTex).rgb;
     o.Normal = half3(0, 0, IN.vface < 0 ? -1 : 1);
+    o.Metallic = o.Smoothness = 0;
 }
