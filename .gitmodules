@@ -18,3 +18,7 @@
 	path = Packages/jp.keijiro.kvant.warp
 	url = https://github.com/keijiro/KvantWarp.git
 	branch = upm
+[submodule "Packages/jp.keijiro.klak"]
+	path = Packages/jp.keijiro.klak
+	url = https://github.com/keijiro/Klak.git
+	branch = upm
