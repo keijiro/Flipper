@@ -6,3 +6,15 @@
 	path = Packages/jp.keijiro.kino.post-processing
 	url = https://github.com/keijiro/Kino.git
 	branch = upm
+[submodule "Packages/jp.keijiro.kvant.swarm-mv"]
+	path = Packages/jp.keijiro.kvant.swarm-mv
+	url = https://github.com/keijiro/KvantSwarmMV.git
+	branch = upm
+[submodule "Packages/jp.keijiro.kvant.spray-mv"]
+	path = Packages/jp.keijiro.kvant.spray-mv
+	url = https://github.com/keijiro/KvantSprayMV.git
+	branch = upm
+[submodule "Packages/jp.keijiro.kvant.warp"]
+	path = Packages/jp.keijiro.kvant.warp
+	url = https://github.com/keijiro/KvantWarp.git
+	branch = upm
