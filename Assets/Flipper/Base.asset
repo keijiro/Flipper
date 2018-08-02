@@ -68,13 +68,13 @@ MonoBehaviour:
     value: {r: 0, g: 0, b: 0, a: 1}
   edgeSource:
     overrideState: 1
-    value: 2
+    value: 1
   edgeThreshold:
     overrideState: 1
-    value: 0
+    value: 0.601
   edgeContrast:
     overrideState: 1
-    value: 0.8
+    value: 1
   fillGradient:
     overrideState: 1
     value:
@@ -87,8 +87,8 @@ MonoBehaviour:
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 771
-      ctime1: 65535
+      ctime0: 1928
+      ctime1: 8674
       ctime2: 65535
       ctime3: 65535
       ctime4: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 1
+      m_Mode: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
   fillOpacity:
