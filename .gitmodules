@@ -22,3 +22,7 @@
 	path = Packages/jp.keijiro.klak
 	url = https://github.com/keijiro/Klak.git
 	branch = upm
+[submodule "Packages/jp.keijiro.lasp"]
+	path = Packages/jp.keijiro.lasp
+	url = https://github.com/keijiro/Lasp.git
+	branch = upm
