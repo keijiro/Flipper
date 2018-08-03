@@ -59,6 +59,7 @@ namespace Flipper
                 lv = offs + Level - 1;
             }
 
+            _material.SetColor("_Color", GlobalConfig.Instance.BaseColor);
             _material.SetFloat("_Intensity", Mathf.Clamp01(lv));
             Graphics.Blit(null, destination, _material, (int)_effect);
         }

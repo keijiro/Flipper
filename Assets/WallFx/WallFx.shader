@@ -5,6 +5,7 @@
     #include "UnityCG.cginc"
     #include "SimplexNoise2D.hlsl"
 
+    fixed4 _Color;
     fixed _Intensity;
 
     float4 Vertex(float4 position : POSITION, inout float2 uv : TEXCOORD0) : SV_Position
@@ -12,19 +13,24 @@
         return UnityObjectToClipPos(position);
     }
 
+    fixed4 Recolor(half intensity)
+    {
+        return fixed4(GammaToLinearSpace(_Color.rgb * intensity), _Color.a);
+    }
+
     fixed4 FragmentFill(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target
     {
-        return fixed4(GammaToLinearSpace(_Intensity), 1);
+        return Recolor(_Intensity);
     }
 
     fixed4 FragmentVerticalBar(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target
     {
-        return abs(uv.x - 0.5) * 2 < _Intensity;
+        return Recolor(abs(uv.x - 0.5) * 2 < _Intensity);
     }
 
     fixed4 FragmentHorizontalBar(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target
     {
-        return abs(uv.y - 0.5) * 2 < _Intensity;
+        return Recolor(abs(uv.y - 0.5) * 2 < _Intensity);
     }
 
     fixed4 Slits(float x)
@@ -32,7 +38,7 @@
         float2 p = float2(x, _Time.y * 2);
         fixed n = snoise(p * float2(8, 1)) + snoise(p * float2(23, 1)) / 2;
         n = (abs(n) / 1.4 + _Intensity / 2 - 1) * 100; 
-        return fixed4(GammaToLinearSpace(saturate(n)), 1);
+        return Recolor(saturate(n));
     }
 
     fixed4 FragmentVerticalSlits(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target
@@ -50,7 +56,7 @@
         float2 p = uv - 0.5;
         float seed = (p.y > 0) * 2 + (p.x > 0);
         float x = dot(abs(p), 1) + seed * 30;
-        return Slits(x * 0.4 - _Time.y * 0.2);
+        return Recolor(Slits(x * 0.4 - _Time.y * 0.2));
     }
 
     // Hash function from H. Schechter & R. Bridson, goo.gl/RXiKaH
@@ -73,7 +79,7 @@
     fixed4 FragmentStreamLines(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target
     {
         float speed = lerp(1, 4, Random(uv.y * 10000));
-        return frac(uv.x / 8 + speed * _Time.y) < _Intensity * 0.5;
+        return Recolor(frac(uv.x / 8 + speed * _Time.y) < _Intensity * 0.5);
     }
 
     ENDCG
