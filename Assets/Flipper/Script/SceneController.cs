@@ -1,6 +1,7 @@
 using UnityEngine;
 using Klak.Motion;
 using UnityEngine.Rendering.PostProcessing;
+using Flipbook;
 
 namespace Flipper
 {
@@ -11,9 +12,9 @@ namespace Flipper
         [SerializeField] SmoothFollow _cameraMotion;
         [SerializeField] BrownianMotion[] _cameraPivots;
         [SerializeField] PostProcessVolume _flashVolume;
-        [SerializeField] Lasp.LevelMonitor _levelMonitor;
         [SerializeField] Puppet.Dancer _dancer;
         [SerializeField] WallFx _wallFx;
+        [SerializeField] FlipbookRenderer _flipbook;
 
         #endregion
 
@@ -30,9 +31,6 @@ namespace Flipper
         #endregion
         
         #region Public members
-
-        public float AudioGain { get; set; }
-        public float AudioDynamicRange { get; set; }
 
         public void RandomizeBaseColor()
         {
@@ -65,9 +63,6 @@ namespace Flipper
         {
             _flashVolume.weight = SmoothStep(0, 1, _flash);
             _wallFx.Flash = SmoothStep(0.8f, 1, _flash);
-
-            _levelMonitor.gain = Mathf.Lerp(0, 30, AudioGain);
-            _levelMonitor.dynamicRange = Mathf.Lerp(3, 12, AudioDynamicRange);
         }
 
         #endregion

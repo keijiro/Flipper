@@ -23,6 +23,16 @@ namespace Flipbook
         [SerializeField, HideInInspector] Mesh _mesh;
         [SerializeField, HideInInspector] Shader _shader;
 
+        public float Interval {
+            get { return _interval; }
+            set { _interval = value; }
+        }
+
+        public float Speed {
+            get { return _speed; }
+            set { _speed = value; }
+        }
+
         void OnValidate()
         {
             _resolution = Vector2Int.Max(_resolution, Vector2Int.one * 32);

@@ -22,6 +22,11 @@ namespace Flipper
             set { _effect = value; }
         }
 
+        public int EffectAsInt {
+            get { return (int)_effect; }
+            set { _effect = (EffectType)value; }
+        }
+
         #endregion
 
         #region Runtime properties
