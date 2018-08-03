@@ -37,6 +37,25 @@ namespace GeoFx
 
         #endregion
 
+        #region Public properties
+
+        public float BaseRadius {
+            get { return _baseRadius; }
+            set { _baseRadius = value; }
+        }
+
+        public float StripWidth {
+            get { return _stripWidth; }
+            set { _stripWidth = value; }
+        }
+
+        public float StripLength {
+            get { return _stripLength; }
+            set { _stripLength = value; }
+        }
+
+        #endregion
+
         #region Bone definitions
 
         [System.Serializable] struct Bone
