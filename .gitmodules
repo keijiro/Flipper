@@ -26,3 +26,7 @@
 	path = Packages/jp.keijiro.lasp
 	url = https://github.com/keijiro/Lasp.git
 	branch = upm
+[submodule "Packages/jp.keijiro.klak.vjui"]
+	path = Packages/jp.keijiro.klak.vjui
+	url = https://github.com/keijiro/VJUI.git
+	branch = upm
