@@ -7,6 +7,7 @@
 
     fixed4 _Color;
     fixed _Intensity;
+    fixed _Flash;
 
     float4 Vertex(float4 position : POSITION, inout float2 uv : TEXCOORD0) : SV_Position
     {
@@ -15,7 +16,8 @@
 
     fixed4 Recolor(half intensity)
     {
-        return fixed4(GammaToLinearSpace(_Color.rgb * intensity), _Color.a);
+        half3 c = _Color.rgb * max(intensity, _Flash);
+        return fixed4(GammaToLinearSpace(c), _Color.a);
     }
 
     fixed4 FragmentFill(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target

@@ -27,6 +27,7 @@ namespace Flipper
         #region Runtime properties
 
         public float Level { get; set; }
+        public float Flash { get; set; }
 
         #endregion
 
@@ -61,6 +62,7 @@ namespace Flipper
 
             _material.SetColor("_Color", GlobalConfig.Instance.BaseColor);
             _material.SetFloat("_Intensity", Mathf.Clamp01(lv));
+            _material.SetFloat("_Flash", Flash);
             Graphics.Blit(null, destination, _material, (int)_effect);
         }
 

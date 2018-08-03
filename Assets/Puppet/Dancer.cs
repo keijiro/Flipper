@@ -119,6 +119,16 @@ namespace Puppet
 
         #endregion
 
+        #region Public method
+
+        public void Rehash()
+        {
+            _randomSeed++;
+            Start();
+        }
+
+        #endregion
+
         #region Private variables
 
         Animator _animator;
@@ -137,7 +147,7 @@ namespace Puppet
 
         // Transformation matrices of the chest bone. Used to calculate the
         // hand positions. These matrices are unavailable in OnAnimatorIK, so
-        // cache them in Update.
+        // cache them in LateUpdate.
         Matrix4x4 _chestMatrix, _chestMatrixInv;
 
         #endregion
@@ -334,7 +344,7 @@ namespace Puppet
             _feet[1] = origin + foot;
         }
 
-        void Update()
+        void LateUpdate()
         {
             // Noise update
             _noise.Frequency = _noiseFrequency;
