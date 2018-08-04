@@ -20,6 +20,7 @@ namespace GeoFx
         SerializedProperty _waveWidth;
         SerializedProperty _waveSpeed;
         SerializedProperty _distortion;
+        SerializedProperty _spherize;
 
         SerializedProperty _baseColor;
         SerializedProperty _hueShift;
@@ -44,6 +45,7 @@ namespace GeoFx
             _waveWidth = serializedObject.FindProperty("_waveWidth");
             _waveSpeed = serializedObject.FindProperty("_waveSpeed");
             _distortion = serializedObject.FindProperty("_distortion");
+            _spherize = serializedObject.FindProperty("_spherize");
 
             _baseColor = serializedObject.FindProperty("_baseColor");
             _hueShift = serializedObject.FindProperty("_hueShift");
@@ -113,6 +115,7 @@ namespace GeoFx
             EditorGUILayout.PropertyField(_waveWidth);
             EditorGUILayout.PropertyField(_waveSpeed);
             EditorGUILayout.PropertyField(_distortion);
+            EditorGUILayout.PropertyField(_spherize);
 
             EditorGUILayout.Space();
 

@@ -23,6 +23,7 @@ namespace GeoFx
         [SerializeField, Range(0, 10)] float _waveWidth = 2;
         [SerializeField, Range(0, 10)] float _waveSpeed = 2;
         [SerializeField, Range(0, 1)] float _distortion = 0.1f;
+        [SerializeField, Range(0, 1)] float _spherize;
 
         [SerializeField, ColorUsage(false)] Color _baseColor = Color.white;
         [SerializeField, Range(0, 1)] float _hueShift = 0.1f;
@@ -52,6 +53,11 @@ namespace GeoFx
         public float StripLength {
             get { return _stripLength; }
             set { _stripLength = value; }
+        }
+
+        public float Spherize {
+            get { return _spherize; }
+            set { _spherize = value; }
         }
 
         #endregion
@@ -188,16 +194,20 @@ namespace GeoFx
             _normals  .Clear();
             _texcoords.Clear();
 
+            var chest = _sourceAnimator.GetBoneTransform(HumanBodyBones.Chest);
+            var center1 = chest.position - Vector3.up * _baseRadius;
+            var center2 = chest.position + Vector3.up * _baseRadius;
+
             foreach (var bone in _boneList)
             {
                 var joint1 = _sourceAnimator.GetBoneTransform(bone.JointFrom);
                 var joint2 = _sourceAnimator.GetBoneTransform(bone.JointTo);
 
-                _vertices.Add(joint1.position);
-                _vertices.Add(joint2.position);
+                _vertices.Add(Vector3.Lerp(joint1.position, center1, _spherize));
+                _vertices.Add(Vector3.Lerp(joint2.position, center2, _spherize));
 
-                _normals.Add(joint1.up);
-                _normals.Add(joint2.up);
+                _normals.Add(Vector3.Lerp(joint1.up, chest.up, _spherize).normalized);
+                _normals.Add(Vector3.Lerp(joint2.up, chest.up, _spherize).normalized);
 
                 _texcoords.Add(Vector2.one * bone.Radius);
                 _texcoords.Add(Vector2.one * bone.Radius);
@@ -233,6 +243,7 @@ namespace GeoFx
             _material.SetVector(ShaderID.MatParams, mparams);
             _material.SetVector(ShaderID.BaseHSVM, ColorToHsvm(_baseColor));
             _material.SetVector(ShaderID.AddHSVM, ColorToHsvm(_emissiveColor));
+            _material.SetFloat("_Spherize", _spherize);
 
             if (_debug)
                 _material.EnableKeyword("GEOFX_DEBUG");

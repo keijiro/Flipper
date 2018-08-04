@@ -12,6 +12,7 @@
 // Effect properties
 float4 _GeoParams; // radius, width, speed, length
 float4 _AnimParams; // time, wave width, wave speed, distortion
+float _Spherize;
 
 // Material properties
 half4 _MatParams; // metallic, smoothness, hue shift, hilight
@@ -156,6 +157,10 @@ void Geometry(
         // be only depend on the absolute position and time.
         float time_amp = BaseTime * WaveSpeed + param_z * WaveWidth;
         half amp = 1 + 0.7 * snoise(float2(primitiveID * 53, time_amp));
+
+        // Spherize the amp parameter
+        half sp = (param_z - 0.5) * 2;
+        amp = lerp(amp, sqrt(1 - sp * sp), _Spherize);
 
         // Radius
         half radius = 1 + 0.7 * snoise(float2(id_strip + 40, phi * 0.25));
