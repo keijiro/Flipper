@@ -26,9 +26,45 @@ namespace Flipper
             return x * x * (3 - 2 * x);
         }
 
+        void UpdatePuppetParameters(float param)
+        {
+            _dancer.noiseFrequency = Mathf.Lerp(0.1f, 0.33f, param);
+
+            _dancer.footDistance  = Mathf.Lerp(0.4f, 0.6f, param);
+            _dancer.stepFrequency = Mathf.Lerp(0.1f, 0.4f, param);
+            _dancer.stepHeight    = Mathf.Lerp(0, 0.1f, param);
+            _dancer.stepAngle     = Mathf.Lerp(0, 90, param);
+
+            _dancer.hipHeight        = Mathf.Lerp(0.95f, 0.8f, param);
+            _dancer.hipPositionNoise = Mathf.Lerp(0.05f, 0.3f, param);
+            _dancer.hipRotationNoise = Mathf.Lerp(4, 50, param);
+
+            _dancer.spineRotationNoise = Vector3.Lerp(
+                new Vector3(15, 6, 6),
+                new Vector3(50, 30, 30),
+                param
+            );
+
+            _dancer.handPosition = Vector3.Lerp(
+                new Vector3(0.3f, -0.03f, 0.19f),
+                new Vector3(0.3f, 0.4f, -0.4f),
+                param
+            );
+
+            _dancer.handPositionNoise = Vector3.Lerp(
+                new Vector3(0.1f, 0.1f, 0.1f),
+                new Vector3(0.4f, 0.4f, 0.6f),
+                param
+            );
+
+            _dancer.headMove = Mathf.Lerp(3, 10, param);
+        }
+
         #endregion
 
         #region Public members
+
+        public float PuppetParameter { get; set; }
 
         public void RandomizeBaseColor()
         {
@@ -55,6 +91,7 @@ namespace Flipper
         void Update()
         {
             _flash = Mathf.Clamp01(_flash - Time.deltaTime * 2);
+            UpdatePuppetParameters(PuppetParameter);
         }
 
         void LateUpdate()
