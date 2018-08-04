@@ -1,7 +1,6 @@
 using UnityEngine;
 using Klak.Motion;
 using UnityEngine.Rendering.PostProcessing;
-using Flipbook;
 
 namespace Flipper
 {
@@ -14,7 +13,6 @@ namespace Flipper
         [SerializeField] PostProcessVolume _flashVolume;
         [SerializeField] Puppet.Dancer _dancer;
         [SerializeField] WallFx _wallFx;
-        [SerializeField] FlipbookRenderer _flipbook;
 
         #endregion
 
@@ -29,7 +27,7 @@ namespace Flipper
         }
 
         #endregion
-        
+
         #region Public members
 
         public void RandomizeBaseColor()
@@ -56,7 +54,7 @@ namespace Flipper
 
         void Update()
         {
-            _flash = Mathf.Clamp01(_flash - Time.deltaTime);
+            _flash = Mathf.Clamp01(_flash - Time.deltaTime * 2);
         }
 
         void LateUpdate()

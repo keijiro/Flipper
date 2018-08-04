@@ -37,9 +37,10 @@
 
     fixed4 Slits(float x)
     {
-        float2 p = float2(x, _Time.y * 2);
-        fixed n = snoise(p * float2(8, 1)) + snoise(p * float2(23, 1)) / 2;
-        n = (abs(n) / 1.4 + _Intensity / 2 - 1) * 100; 
+        float t = _Time.y;
+        fixed n = snoise(float2( 5 * x + t * 2, t * 2)) +
+                  snoise(float2(19 * x + t * 2, t * 2));
+        n = (abs(n) / 1.4 + _Intensity / 2 - 1) * 100;
         return Recolor(saturate(n));
     }
 
