@@ -315,10 +315,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 35311305}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 1, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 515738906}
+  m_Father: {fileID: 1159478461}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &35311307
@@ -338,7 +338,7 @@ MonoBehaviour:
   _rotationFrequency: 0.2
   _positionAmplitude: 1
   _rotationAmplitude: 10
-  _positionScale: {x: 5, y: 2, z: 5}
+  _positionScale: {x: 4, y: 2, z: 4}
   _rotationScale: {x: 1, y: 1, z: 0}
   _positionFractalLevel: 2
   _rotationFractalLevel: 3
@@ -1194,7 +1194,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 247860456}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 618577994}
@@ -1218,7 +1218,7 @@ MonoBehaviour:
   _rotationFrequency: 0.2
   _positionAmplitude: 1
   _rotationAmplitude: 10
-  _positionScale: {x: 0, y: 0, z: 0.8}
+  _positionScale: {x: 0, y: 0, z: 0.6}
   _rotationScale: {x: 1, y: 1, z: 0}
   _positionFractalLevel: 2
   _rotationFractalLevel: 3
@@ -2031,38 +2031,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 506963345}
   m_CullTransparentMesh: 0
---- !u!1 &515738905
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 515738906}
-  m_Layer: 0
-  m_Name: Sawrms
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &515738906
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 515738905}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 35311306}
-  - {fileID: 1194329325}
-  - {fileID: 1960627322}
-  - {fileID: 675659116}
-  m_Father: {fileID: 580129707}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519906819
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,7 +2498,8 @@ Transform:
   - {fileID: 887260982}
   - {fileID: 486770326}
   - {fileID: 1004191369}
-  - {fileID: 515738906}
+  - {fileID: 1960627322}
+  - {fileID: 675659116}
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3350,8 +3319,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 515738906}
-  m_RootOrder: 3
+  m_Father: {fileID: 580129707}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &675659117
 MeshFilter:
@@ -3388,7 +3357,7 @@ MonoBehaviour:
   _noiseFrequency: 0.2
   _noiseSpread: 0.2
   _noiseSpeed: 0.3
-  _swirlAmplitude: 0.04
+  _swirlAmplitude: 0.1
   _swirlFrequency: 0.2
   _kernels: {fileID: 4800000, guid: 1f76db9489dad1746b58e12bf468d5ca, type: 3}
   _defaultMaterial: {fileID: 2100000, guid: 6b2d3d1db33684e4ba8ac54f0155ca45, type: 2}
@@ -5494,6 +5463,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: a2e23193c976434eb66491671c592689,
     type: 3}
   m_PrefabInternal: {fileID: 1993012713}
+--- !u!1 &1159478460
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1159478461}
+  m_Layer: 0
+  m_Name: Swarm Targets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1159478461
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1159478460}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 35311306}
+  - {fileID: 1194329325}
+  m_Father: {fileID: 2098087654}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1187132942
 GameObject:
   m_ObjectHideFlags: 0
@@ -5592,10 +5591,10 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1194329324}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: -1, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 515738906}
+  m_Father: {fileID: 1159478461}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1194329326
@@ -5615,7 +5614,7 @@ MonoBehaviour:
   _rotationFrequency: 0.2
   _positionAmplitude: 1
   _rotationAmplitude: 10
-  _positionScale: {x: 5, y: 2, z: 5}
+  _positionScale: {x: 4, y: 2, z: 4}
   _rotationScale: {x: 1, y: 1, z: 0}
   _positionFractalLevel: 2
   _rotationFractalLevel: 3
@@ -9054,7 +9053,7 @@ MonoBehaviour:
   _noiseFrequency: 0.2
   _noiseSpread: 0.2
   _noiseSpeed: 0.3
-  _swirlAmplitude: 0.04
+  _swirlAmplitude: 0.1
   _swirlFrequency: 0.2
   _kernels: {fileID: 4800000, guid: 1f76db9489dad1746b58e12bf468d5ca, type: 3}
   _defaultMaterial: {fileID: 2100000, guid: 6b2d3d1db33684e4ba8ac54f0155ca45, type: 2}
@@ -9103,8 +9102,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 515738906}
-  m_RootOrder: 2
+  m_Father: {fileID: 580129707}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1970720654
 GameObject:
@@ -10083,6 +10082,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1661227639}
+  - {fileID: 1159478461}
   m_Father: {fileID: 1110904363}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
