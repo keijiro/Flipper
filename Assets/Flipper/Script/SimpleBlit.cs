@@ -7,6 +7,17 @@ namespace Flipper
     {
         [SerializeField] Texture _source;
         [SerializeField, Range(0, 1)] float _opacity = 1;
+        [SerializeField, Range(0, 1)] float _glitch = 0;
+
+        public float Opacity {
+            get { return _opacity; }
+            set { _opacity = value; }
+        }
+
+        public float Glitch {
+            get { return _glitch; }
+            set { _glitch = value; }
+        }
 
         [SerializeField, HideInInspector] Shader _shader;
 
@@ -31,7 +42,11 @@ namespace Flipper
                 _material.hideFlags = HideFlags.DontSave;
             }
 
+            var fcount = Application.isPlaying ? Time.frameCount : 0;
+
             _material.SetFloat("_Opacity", _opacity);
+            _material.SetFloat("_Glitch", _glitch * 0.4f);
+            _material.SetInt("_FrameCount", fcount);
 
             Graphics.Blit(_source == null ? source : _source, destination, _material, 0);
         }

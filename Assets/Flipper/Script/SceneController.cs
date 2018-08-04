@@ -13,12 +13,14 @@ namespace Flipper
         [SerializeField] PostProcessVolume _flashVolume;
         [SerializeField] Puppet.Dancer _dancer;
         [SerializeField] WallFx _wallFx;
+        [SerializeField] SimpleBlit[] _blitters;
 
         #endregion
 
         #region Private members
 
         float _flash;
+        float _glitch;
 
         static float SmoothStep(float edge0, float edge1, float x)
         {
@@ -65,6 +67,7 @@ namespace Flipper
         #region Public members
 
         public float PuppetParameter { get; set; }
+        public float BlitterGlitch { get; set; }
 
         public void RandomizeBaseColor()
         {
@@ -84,13 +87,20 @@ namespace Flipper
             _flash = 1;
         }
 
+        public void HitGlitch()
+        {
+            _glitch = 1;
+        }
+
         #endregion
 
         #region MonoBehaviour implementation
 
         void Update()
         {
-            _flash = Mathf.Clamp01(_flash - Time.deltaTime * 2);
+            var dt = Time.deltaTime;
+            _flash = Mathf.Clamp01(_flash - dt * 2);
+            _glitch = Mathf.Clamp01(_glitch - dt * 5);
             UpdatePuppetParameters(PuppetParameter);
         }
 
@@ -98,6 +108,9 @@ namespace Flipper
         {
             _flashVolume.weight = SmoothStep(0, 1, _flash);
             _wallFx.Flash = SmoothStep(0.8f, 1, _flash);
+
+            foreach (var blitter in _blitters)
+                blitter.Glitch = BlitterGlitch + SmoothStep(0, 1, _glitch);
         }
 
         #endregion
