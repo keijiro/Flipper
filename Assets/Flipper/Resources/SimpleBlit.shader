@@ -3,8 +3,7 @@ Shader "Hidden/Flipper/SimpleBlit"
     Properties
     {
         _MainTex("", 2D) = "black"{}
-        _Opacity("", Range(0, 1)) = 1
-        _Glitch("", Range(0, 1)) = 0
+        _Overlay("", 2D) = "black"{}
     }
 
     CGINCLUDE
@@ -12,8 +11,11 @@ Shader "Hidden/Flipper/SimpleBlit"
     #include "UnityCG.cginc"
 
     sampler2D _MainTex;
+    sampler2D _Overlay;
+
     float4 _MainTex_TexelSize;
-    fixed _Opacity;
+
+    fixed2 _Opacity;
     fixed _Glitch;
     uint _FrameCount;
 
@@ -34,12 +36,7 @@ Shader "Hidden/Flipper/SimpleBlit"
         return float(Hash(seed)) / 4294967295.0; // 2^32-1
     }
 
-    float4 Vertex(float4 position : POSITION, inout float2 uv : TEXCOORD0) : SV_Position
-    {
-        return UnityObjectToClipPos(position);
-    }
-
-    fixed4 Fragment(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target
+    float2 GlitchUV(float2 uv)
     {
         uint seed = uv.y * _MainTex_TexelSize.w / 8;
         seed += _FrameCount * 2048;
@@ -48,12 +45,36 @@ Shader "Hidden/Flipper/SimpleBlit"
         delta = delta * delta * delta * _Glitch;
 
         uv.x += delta;
+        return uv;
+    }
 
-        fixed4 c = tex2D(_MainTex, uv);
+    float4 Vertex(float4 position : POSITION, inout float2 uv : TEXCOORD0) : SV_Position
+    {
+        return UnityObjectToClipPos(position);
+    }
+
+    fixed4 FragmentSingle(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target
+    {
+        fixed4 c = tex2D(_MainTex, GlitchUV(uv));
         c.rgb = LinearToGammaSpace(c.rgb);
-        c.rgb *= _Opacity;
+        c.rgb *= _Opacity.x;
         c.rgb = GammaToLinearSpace(c.rgb);
         return c;
+    }
+
+    fixed4 FragmentDual(float4 position : SV_Position, float2 uv : TEXCOORD0) : SV_Target
+    {
+        uv = GlitchUV(uv);
+
+        fixed4 c1 = tex2D(_MainTex, uv);
+        fixed4 c2 = tex2D(_Overlay, uv);
+
+        c1.rgb = LinearToGammaSpace(c1.rgb);
+        c2.rgb = LinearToGammaSpace(c2.rgb);
+
+        half3 c = c1.rgb * _Opacity.x + c2.rgb * _Opacity.y;
+
+        return half4(GammaToLinearSpace(c), c1.a);
     }
 
     ENDCG
@@ -65,7 +86,14 @@ Shader "Hidden/Flipper/SimpleBlit"
         {
             CGPROGRAM
             #pragma vertex Vertex
-            #pragma fragment Fragment
+            #pragma fragment FragmentSingle
+            ENDCG
+        }
+        Pass
+        {
+            CGPROGRAM
+            #pragma vertex Vertex
+            #pragma fragment FragmentDual
             ENDCG
         }
     }

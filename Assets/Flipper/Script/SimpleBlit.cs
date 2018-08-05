@@ -6,12 +6,21 @@ namespace Flipper
     public class SimpleBlit : MonoBehaviour
     {
         [SerializeField] Texture _source;
-        [SerializeField, Range(0, 1)] float _opacity = 1;
+        [SerializeField, Range(0, 1)] float _sourceOpacity = 1;
+
+        [SerializeField] Texture _overlay;
+        [SerializeField, Range(0, 1)] float _overlayOpacity = 1;
+
         [SerializeField, Range(0, 1)] float _glitch = 0;
 
-        public float Opacity {
-            get { return _opacity; }
-            set { _opacity = value; }
+        public float SourceOpacity {
+            get { return _sourceOpacity; }
+            set { _sourceOpacity = value; }
+        }
+
+        public float OverlayOpacity {
+            get { return _overlayOpacity; }
+            set { _overlayOpacity = value; }
         }
 
         public float Glitch {
@@ -34,21 +43,29 @@ namespace Flipper
             }
         }
 
-        void OnRenderImage(RenderTexture source, RenderTexture destination)
+        void OnRenderImage(RenderTexture filterSource, RenderTexture destination)
         {
+            var source = _source != null ? _source : filterSource;
+
             if (_material == null)
             {
                 _material = new Material(_shader);
                 _material.hideFlags = HideFlags.DontSave;
             }
 
-            var fcount = Application.isPlaying ? Time.frameCount : 0;
-
-            _material.SetFloat("_Opacity", _opacity);
+            _material.SetVector("_Opacity", new Vector2(_sourceOpacity, _overlayOpacity));
             _material.SetFloat("_Glitch", _glitch * 0.4f);
-            _material.SetInt("_FrameCount", fcount);
+            _material.SetInt("_FrameCount", Application.isPlaying ? Time.frameCount : 0);
 
-            Graphics.Blit(_source == null ? source : _source, destination, _material, 0);
+            if (_overlay == null || _overlayOpacity == 0)
+            {
+                Graphics.Blit(source, destination, _material, 0);
+            }
+            else
+            {
+                _material.SetTexture("_Overlay", _overlay);
+                Graphics.Blit(source, destination, _material, 1);
+            }
         }
     }
 }
