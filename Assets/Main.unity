@@ -1537,7 +1537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseColor: {r: 1, g: 1, b: 1, a: 1}
-  _displayCount: 2
+  _displayCount: 3
 --- !u!4 &357663653
 Transform:
   m_ObjectHideFlags: 0
