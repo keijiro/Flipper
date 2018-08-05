@@ -59,7 +59,7 @@
         float2 p = uv - 0.5;
         float seed = (p.y > 0) * 2 + (p.x > 0);
         float x = dot(abs(p), 1) + seed * 30;
-        return Recolor(Slits(x * 0.4 - _Time.y * 0.2));
+        return Slits(x * 0.4 - _Time.y * 0.2);
     }
 
     // Hash function from H. Schechter & R. Bridson, goo.gl/RXiKaH
