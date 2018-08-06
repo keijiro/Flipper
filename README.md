@@ -12,7 +12,7 @@ features the [skeletal geometric effects] and the [flipbook effect].
 
 [Unity]: https://unity3d.com 
 [ADIRECTOR Channel]: https://www.facebook.com/events/249694499194053/
-[skeletal geometric effect]: https://github.com/keijiro/SkeletalGeometricEffects
+[skeletal geometric effects]: https://github.com/keijiro/SkeletalGeometricEffects
 [flipbook effect]: https://github.com/keijiro/FlipBook
 
 System requirements
